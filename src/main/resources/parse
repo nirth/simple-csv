@@ -1,5 +1,0 @@
-#!/bin/bash
-
-java -jar \
-target/treatment-parser-0.1-SNAPSHOT-jar-with-dependencies.jar target/classes/csvs/ \
-output/treatments.coffee
