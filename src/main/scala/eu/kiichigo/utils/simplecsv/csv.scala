@@ -29,11 +29,8 @@ object CSV {
 		var columnHeaders:Array[String] = null;
 		var rowHeaders:Array[String] = null;
 
-		if (closure == null)
-			closure = defaultCellClosure;
-
 		if (!file.exists()) {
-			//throw something
+			// ToDo: throw an error.
 		}
 
 		for (row <- scala.io.Source.fromFile(file).getLines()) {
@@ -49,9 +46,14 @@ object CSV {
 
 					if (value != null && value.length >= 1) {
 						if (rowHeader && columnCount == 0) {
-							rowHeaders.push(value);
+							rowHeaders + value;
 						} else {
-							val cell = new Cell(rc, cc, closure(value),
+							val v = if (closure == null)
+									defaultCellClosure(value);
+								else
+									closure(value);
+
+							val cell = new Cell(rc, cc, v,
 								if (columnHeader) columnHeaders(cc).trim() else null,
 								if (rowHeader) rowHeaders(rc).trim() else null
 							);
@@ -72,7 +74,9 @@ object CSV {
 		return null;
 	}
 
-	private defaultCellClosure(string) = string;
+	private def defaultCellClosure(input:String):Any = {
+		return input;
+	}
 }
 
 class CSV(private val data:List[Cell]) {
@@ -87,7 +91,7 @@ class CSV(private val data:List[Cell]) {
 
 	def cells = data;
 
-	def length = data.length * data(0).length;
+	def length = data.length;
 }
 
 case class Cell(val row:Int, val column:Int, val data:Any, val rowHeader:String = null, val columnHeader:String = null) {
