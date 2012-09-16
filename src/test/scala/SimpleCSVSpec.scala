@@ -8,18 +8,23 @@ import org.specs.runner.{ JUnitSuiteRunner, JUnit }
 import eu.kiichigo.utils.simplecsv.CSV;
 import java.io.File;
 
-@RunWith(classOf[JUnitSuiteRunner])
-class CSVSpecTest extends Specification with JUnit /*with ScalaCheck*/ {
-	
-	"CSV factory" should {
-		"parse csv from path" in {
-			
+//@RunWith(classOf[JUnitSuiteRunner])
+object SimpleCSVSpec extends Specification("Simple CSV Specification") {
+	"Simple CSV Parser" should {
+		doBefore {
+			val 
+		}
+
+		doAfter {
+
 		}
 	}
 }
 
+/*
 object CSVSpecTest {
   def main(args: Array[String]) {
     new CSVSpecTest().main(args);
   }
 }
+*/
