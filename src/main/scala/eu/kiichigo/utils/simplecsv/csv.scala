@@ -100,4 +100,14 @@ case class Cell(val row:Int, val column:Int, val data:Any, val rowHeader:String 
 	override def toString = "[Cell row=" + row.toString() + " column=" + column.toString() + " data=" + data + " header=" + header + "]";
 }
 
+case class Cells;
+
+case class Column(val index:Int, val cells:List[Cell], header:String = "") extends Cells {
+	override def toString = "[Column index=" + index.toString() + " header=" + header + " cells=" + cells.toString() + "]";
+}
+
+case class Row(val index:Int, val cells:List[Cell], header:String = "") extends Cells {
+	override def toString = "[Row index=" + index.toString() + " header=" + header + " cells=" + cells.toString() + "]";
+}
+
 //val columns = row.split(""",<="([\w\(\.\)]+)""")
