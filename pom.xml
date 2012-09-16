@@ -15,13 +15,12 @@
   </licenses>
 
   <properties>
+     <encoding>UTF-8</encoding>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
-    <encoding>UTF-8</encoding>
     <scala.version>2.9.2</scala.version>
-    <scala.specs.version>2.9.1</scala.specs.version>
     <scala.test.tools.version>1.6.9</scala.test.tools.version>
-    <scala.test.specs.version>2.0.M3</scala.test.specs.version>
+    <scala.test.specs2.version>1.12.1</scala.test.specs2.version>
   </properties>
 
 <!--
@@ -64,9 +63,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.scala-tools.testing</groupId>
-      <artifactId>specs_${scala.specs.version}</artifactId>
-      <version>${scala.test.tools.version}</version>
+      <groupId>org.specs2</groupId>
+      <artifactId>specs2_${scala.version}</artifactId>
+      <version>${scala.test.specs2.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -83,6 +82,20 @@
     <sourceDirectory>src/main/scala</sourceDirectory>
     <testSourceDirectory>src/test/scala</testSourceDirectory>
     <plugins>
+      <!--plugin>
+        <groupId>com.mmakowski</groupId>
+        <artifactId>maven-specs2-plugin</artifactId>
+        <version>0.3.0</version>
+        <executions>
+          <execution>
+            <id>verify</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>run-specs</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
