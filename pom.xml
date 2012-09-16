@@ -18,7 +18,8 @@
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
     <encoding>UTF-8</encoding>
-    <scala.version>2.9.1</scala.version>
+    <scala.version>2.9.2</scala.version>
+    <scala.specs.version>2.9.1</scala.specs.version>
     <scala.test.tools.version>1.6.9</scala.test.tools.version>
     <scala.test.specs.version>2.0.M3</scala.test.specs.version>
   </properties>
@@ -61,18 +62,21 @@
       <version>4.8.1</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.scala-tools.testing</groupId>
-      <artifactId>specs_${scala.version}</artifactId>
+      <artifactId>specs_${scala.specs.version}</artifactId>
       <version>${scala.test.tools.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
+
+    <!--dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.version}</artifactId>
       <version>${scala.test.specs.version}</version>
       <scope>test</scope>
-    </dependency>
+    </dependency-->
+  
   </dependencies>
 
   <build>
