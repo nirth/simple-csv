@@ -79,19 +79,39 @@ object CSV {
 	}
 }
 
-class CSV(private val data:List[Cell]) {
+class CSV(private val _cells:List[Cell]) {
+	private var _rows = null;
+	private var _columns = null;
 
-	def cellAt(row:Int, column:Int) = data.filter(cell => (cell.row == row && cell.column == column))(0);
+	def cellAt(row:Int, column:Int) = _cells.filter(cell => (cell.row == row && cell.column == column))(0);
 
-	def column(index:Int) = data.filter(cell => (cell.column == index))(0);
+	def column(index:Int) = _cells.filter(cell => (cell.column == index));
 
-	def row(index:Int) = data.filter(cell => (cell.row == index))(0);
+	def row(index:Int) = _cells.filter(cell => (cell.row == index));
 
-	def flip = data.map(cell => new Cell(cell.column, cell.row, cell.data, cell.rowHeader, cell.columnHeader));
+	def flip = _cells.map(cell => new Cell(cell.column, cell.row, cell.data, cell.rowHeader, cell.columnHeader));
 
-	def cells = data;
+	def cells = _cells;
 
-	def length = data.length;
+	def length = _cells.length;
+
+	private def initialize = {
+		import scala.collection.mutable.ListBuffer;
+		val rowsBuffer = new ListBuffer[ListBuffer[Cell]];
+		val columnsBuffer = new ListBuffer[ListBuffer[Cell]];
+
+		for (cell <- _cells) {
+			if (rowsBuffer(cell.row) == null)
+				rowsBuffer += new ListBuffer[Cell];
+
+			rowsBuffer(cell.row) += cell;
+
+			if (columnsBuffer(cell.column) == null)
+				columnsBuffer += new ListBuffer[Cell];
+
+			columnsBuffer(cell.column) += cell;
+		}
+	}
 }
 
 case class Cell(val row:Int, val column:Int, val data:Any, val rowHeader:String = null, val columnHeader:String = null) {
